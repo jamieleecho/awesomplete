@@ -364,18 +364,6 @@ function init() {
 	});
 }
 
-// Are we in a browser? Check for Document constructor
-if (typeof Document !== "undefined") {
-	// DOM already loaded?
-	if (document.readyState !== "loading") {
-		init();
-	}
-	else {
-		// Wait for it
-		document.addEventListener("DOMContentLoaded", init);
-	}
-}
-
 _.$ = $;
 _.$$ = $$;
 
@@ -387,6 +375,19 @@ if (typeof self !== "undefined") {
 // Expose Awesomplete as a CJS module
 if (typeof module === "object" && module.exports) {
 	module.exports = _;
+}
+
+
+// Are we in a browser? Check for Document constructor
+if (typeof Document !== "undefined") {
+	// DOM already loaded?
+	if (document.readyState !== "loading") {
+		init();
+	}
+	else {
+		// Wait for it
+		document.addEventListener("DOMContentLoaded", init);
+	}
 }
 
 return _;
